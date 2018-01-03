@@ -1,37 +1,53 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyD4_zMt8NByD4zsxQ8Ugw3NB9MrQN5vfiI",
+        authDomain: "beautycenter-bb072.firebaseapp.com",
+        databaseURL: "https://beautycenter-bb072.firebaseio.com",
+        projectId: "beautycenter-bb072",
+        storageBucket: "beautycenter-bb072.appspot.com",
+        messagingSenderId: "129581670274"
+    };
+    firebase.initializeApp(config);
 
-You can use the [editor on GitHub](https://github.com/alisally/notification/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+    // Retrieve Firebase Messaging object.
+const messaging = firebase.messaging();
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+messaging.requestPermission()
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+.then(function() {
+  console.log('Notification permission granted.');
+  return messaging.getToken();
+  // TODO(developer): Retrieve an Instance ID token for use with FCM.
+  // ...
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+})
 
-1. Numbered
-2. List
+.then(function(token) {
+  console.log(token);
 
-**Bold** and _Italic_ and `Code` text
+  // TODO(developer): Retrieve an Instance ID token for use with FCM.
+  // ...
+})
 
-[Link](url) and ![Image](src)
-```
+.catch(function(err) {
+  console.log('Unable to get permission to notify.', err);
+});
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+messaging.onMessage(function(payload){
+console.log('onMessage :',payload);
+});
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/alisally/notification/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+</script>
+</body>
+</html>
